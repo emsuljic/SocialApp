@@ -31,6 +31,6 @@
     "strictTemplates": true,
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": true,
-    
+    "strictNullChecks": false
   }
 }
