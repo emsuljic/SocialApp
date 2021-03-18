@@ -7,7 +7,7 @@ export interface Pagination{
 
 export class PaginatedResult<T>{
     //list of memebers are gona be stored in result
-    result!: T;
+    result!: T | null;
     //pagination information are stored in pagination
     pagination!: Pagination;
 }

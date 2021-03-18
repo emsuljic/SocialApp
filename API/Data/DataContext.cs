@@ -12,7 +12,10 @@ namespace API.Data
         public DbSet<AppUser> Users { get; set; }
 
         //for likes - table
-        public DbSet<UserLike> Likes {get; set;}
+        public DbSet<UserLike> Likes { get; set; }
+
+        //for messages
+        public DbSet<Message> Messages { get; set; }
 
         //give the entites some configuration
         protected override void OnModelCreating(ModelBuilder builder)
@@ -22,9 +25,9 @@ namespace API.Data
             //user like entity
             builder.Entity<UserLike>()
             //forming PRIMARY KEY for this table
-                .HasKey(k => new {k.SourceUserId, k.LikedUserId});
+                .HasKey(k => new { k.SourceUserId, k.LikedUserId });
 
-                //configure relationships 
+            //configure relationships 
             builder.Entity<UserLike>()
                 .HasOne(s => s.SourceUser)
                 //sourceUser can like many other users
@@ -38,6 +41,17 @@ namespace API.Data
                 .WithMany(l => l.LikedByUsers)
                 .HasForeignKey(s => s.LikedUserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Recipient)
+                .WithMany(m => m.MessagesReceived)
+                //bc we dont want to remove message if the other party hasn't delted it themselves
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
