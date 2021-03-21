@@ -18,6 +18,8 @@ namespace API.Data
 
         //for messages
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Group> Groups { get; set; }    
+        public DbSet<Connection> Connections { get; set; }
 
         //give the entites some configuration
         protected override void OnModelCreating(ModelBuilder builder)

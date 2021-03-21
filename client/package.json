@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
     "@kolkov/ngx-gallery": "^1.2.3",
+    "@microsoft/signalr": "^5.0.4",
     "@schematics/angular": "^9.1.0",
     "bootstrap": "4.1.1",
     "bootswatch": "^4.6.0",
