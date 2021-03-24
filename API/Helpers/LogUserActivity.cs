@@ -4,6 +4,7 @@ using API.Extensions;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
+using API.Data;
 
 namespace API.Helpers
 {
@@ -25,12 +26,12 @@ namespace API.Helpers
             //if they are authenticated then update lastActive property
             var userId = resultContext.HttpContext.User.GetUserId();
             //get acces to repository, use service located
-            var repo = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
+            var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
             //get hold our user object
-            var user = await repo.GetUserByIdAsync(userId);
+            var user = await uow.UserRepository.GetUserByIdAsync(userId);
             //set lastActive property
             user.LastActive = DateTime.Now;
-            await repo.SaveAllAsync();
+            await uow.Complete();
         }
     }
 }

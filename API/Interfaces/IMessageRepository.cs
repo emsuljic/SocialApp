@@ -20,6 +20,6 @@ namespace API.Interfaces
         Task<Message> GetMesaage(int id);
         Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recepientUsername);
-        Task<bool> SaveAllAsync();
+
     }
 }
