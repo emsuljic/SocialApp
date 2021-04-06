@@ -58,6 +58,6 @@ export class AccountService {
   getDecodedToken(token: string){
     //atob -> allow us to decode what is in token 
     //token is in 3 part: 0header, 1pillow, 2signature
-    return JSON.parse(atob(token.split(".")[1] ||'{}'));
+    return JSON.parse(atob(token.split(".")[1]));
   }
 }
